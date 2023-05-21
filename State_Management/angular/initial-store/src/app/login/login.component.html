@@ -1,1 +1,5 @@
-<p>Here be dragons</p>
+<button (click)="invalid()">Login wrongly</button>
+
+<button (click)="valid()">Login correctly</button>
+
+<div>Invalid login count: {{ count$ | async }}  </div>
