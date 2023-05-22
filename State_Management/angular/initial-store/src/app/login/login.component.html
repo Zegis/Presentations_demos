@@ -7,3 +7,5 @@
 
 <div><p>Invalid login count: {{ count$ | async }}</p></div>
 <div><p *ngIf='(status$ | async) === true'> Account is locked</p></div>
+
+<button (click)="set()">Set something up!</button>
