@@ -13,7 +13,12 @@ export const initial_state: LoginState = {
 
 export const loginReducer = createReducer(
     initial_state,
-    on(LoginActions.invalid_login, state => ({...state, invalid_login_tries: state.invalid_login_tries + 1})),
+    on(LoginActions.invalid_login, state => {
+        let lock = false;
+        if(state.invalid_login_tries >= 2)
+            lock = true;
+         return ({...state, invalid_login_tries: state.invalid_login_tries + 1, account_locked: lock})}
+        ),
     on(LoginActions.valid_login, state => ({invalid_login_tries: 0, account_locked: false})),
     on(LoginActions.lock_account, state => ({...state, account_locked: true})),
     on(LoginActions.unlock_account, state => ({...state, account_locked: false})),
