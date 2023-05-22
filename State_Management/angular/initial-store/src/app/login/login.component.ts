@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { valid_login, invalid_login } from '../store/actions/login.actions';
+import * as LoginActions  from '../store/actions/login.actions';
+import {selectCount, selectStatus} from '../store/selectors/login.selectors';
 
 @Component({
   selector: 'app-login',
@@ -9,17 +10,24 @@ import { valid_login, invalid_login } from '../store/actions/login.actions';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  count$: Observable<number>;
+  count$ = this.store.select(selectCount);
+  status$ = this.store.select(selectStatus);
 
-  constructor(private store: Store<{login: number}>) {
-    this.count$ = store.select('login')
-  }
+  constructor(private store: Store) { }
 
   valid() {
-    this.store.dispatch(valid_login());
+    this.store.dispatch(LoginActions.valid_login());
   }
 
   invalid() {
-    this.store.dispatch(invalid_login());
+    this.store.dispatch(LoginActions.invalid_login());
+  }
+
+  lock() {
+    this.store.dispatch(LoginActions.lock_account());
+  }
+
+  unlock() {
+    this.store.dispatch(LoginActions.unlock_account());
   }
 }

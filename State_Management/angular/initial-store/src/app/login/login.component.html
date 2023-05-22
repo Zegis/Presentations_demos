@@ -2,4 +2,8 @@
 
 <button (click)="valid()">Login correctly</button>
 
-<div>Invalid login count: {{ count$ | async }}  </div>
+<button (click)="lock()">Lock Account</button>
+<button (click)="unlock()">Unlock Account</button>
+
+<div><p>Invalid login count: {{ count$ | async }}</p></div>
+<div><p *ngIf='(status$ | async) === true'> Account is locked</p></div>
