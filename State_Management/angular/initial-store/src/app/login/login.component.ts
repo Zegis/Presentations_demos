@@ -30,4 +30,8 @@ export class LoginComponent {
   unlock() {
     this.store.dispatch(LoginActions.unlock_account());
   }
+
+  set() {
+    this.store.dispatch(LoginActions.set_login_data({login_count: Math.floor(Math.random() * 10 + 1), locked: true}));
+  }
 }
